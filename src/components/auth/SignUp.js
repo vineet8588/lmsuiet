@@ -23,7 +23,7 @@ class SignUp extends Component {
     }
     render() {
         return (
-            <div className="container">
+            <div className="container mt-5">
                 <Card className="shadow col-md-8 offset-md-2 my-4 text-center">
                     <CardHeader className="bg-primary text-white"><h3>Register</h3></CardHeader>
                     <CardBody>
@@ -31,10 +31,10 @@ class SignUp extends Component {
                         <FormGroup className='mb-4'>
                             <Label for="examplePassword">Name</Label>
                             <div className="row">
-                                <div className='col-md-3 offset-md-3'>
+                                <div className='col-md-3 my-md-0 offset-md-3'>
                                 <Input className='' onChange={e=>this.handleChange(e)} type='text' name="firstname" id="firstname" placeholder="First Name" />
                                 </div>
-                                <div className='col-md-3'>
+                                <div className='col-md-3 mt-2 my-md-0'>
                                 <Input className='' onChange={e=>this.handleChange(e)} type='text' name="lastname" id="lastname" placeholder="Last Name" />
                                 </div>
                             </div>

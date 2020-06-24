@@ -3,7 +3,9 @@ import {Switch,Route,Redirect} from 'react-router-dom';
 import Home from './HomeComponent';
 import Header from './HeaderComponent';
 import SignIn from './auth/SignIn';
-import SignUp from './auth/SignUp'
+import SignUp from './auth/SignUp';
+import CourseList from './CourseList'
+import CreateCourse from './CreateCourse';
 
 class Main extends Component{
 
@@ -21,11 +23,13 @@ class Main extends Component{
                 <Switch>
                     <Route exact path="/home" component={Home}/>
                     <Route path="/login" component={SignIn}/>
-                    <Route path="/home/:dishId" component={SignIn}/>
+                    <Route path="/home/:courseId" component={CourseList}/>
                     <Route path="/register" component={SignUp}/>
+                    <Route path="/create" component={CreateCourse}/>
                     <Redirect to="/home"/>
                 </Switch>
             </React.Fragment>
+
         );
     }
 

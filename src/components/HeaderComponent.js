@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {Nav,NavItem,Navbar,NavbarBrand,Button,Jumbotron} from 'reactstrap';
+import {Nav,NavItem,Navbar,NavbarBrand,Button} from 'reactstrap';
 import { Link } from 'react-router-dom';
+
 
 class Header extends Component{
     constructor(props){
@@ -13,9 +14,9 @@ class Header extends Component{
     render(){
         return(
             <React.Fragment>
-                <Navbar dark color='primary'>
+                <Navbar className="shadow">
                     <div className="container">
-                        <NavbarBrand className="mr-auto">LMSUIET</NavbarBrand> 
+                    <NavbarBrand href='/' className="mr-auto" style={{color:'black',textDecoration:'none'}}>LMSUIET</NavbarBrand>
                         <Nav navbar>
                             <NavItem>
                                 <Button tag={Link} to="/login" color="success" size='lg'>Login</Button>{' '}
@@ -23,16 +24,6 @@ class Header extends Component{
                         </Nav>
                 </div>
                 </Navbar>
-                <Jumbotron>
-                <div className="container">
-                    <div className="row row-header">
-                        <div className="col-12 col-sm-6">
-                            <h1>LMSUIET</h1>
-                            <p>A platform to manage lectures.</p>
-                        </div>
-                    </div>
-                </div>
-                </Jumbotron>
             </React.Fragment>
         );
     }
