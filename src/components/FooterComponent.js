@@ -8,10 +8,9 @@ function Footer(props){
             <div className="offset-5">       
             <u><h5>Links</h5></u>
             <ul className="list-unstyled" >
-                <li><Link to="/home"> Home</Link></li>
-                <li><Link to="/aboutus">About</Link></li>
-                <li><Link to="/menu">Menu</Link></li>
-                <li><Link to="/contactus">Contact</Link></li>
+                <li><Link style={{color:'cyan'}} to="/"> Home</Link></li>
+                <li><Link style={{color:'cyan'}} to="/login">Login</Link></li>
+                <li><Link style={{color:'cyan'}} to="/create">Create</Link></li>
             </ul>
             </div>
         </div>

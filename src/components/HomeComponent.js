@@ -1,8 +1,8 @@
 import React from 'react';
-import {CATEGORIES} from '../shared/categories';
 import {CardDeck,Card,CardBody,CardTitle,Jumbotron} from 'reactstrap';
 import {Link} from 'react-router-dom';
-import undraw_professor from '../shared/undraw_professor.svg'
+import undraw_professor from '../shared/undraw_professor.svg';
+import Footer from './FooterComponent';
 
 function RenderCards({categs}){
     return(
@@ -39,20 +39,21 @@ function Home(props){
                     </div>
                 </div>
             </Jumbotron>
-            <div className="container py-3">
-                <div className="row m-4"><h1>Categories</h1></div>
+            <div className="container pt-3">
+                <div className="row ml-3"><h1>Categories</h1></div>
                 <div className="row">
                     <div className="col-12">
                         <CardDeck className=''>
-                            <RenderCards categs={CATEGORIES.slice(0,3)}/>
+                            <RenderCards categs={props.categories.slice(0,3)}/>
                         </CardDeck>
                     
                         <CardDeck className=''>
-                            <RenderCards categs={CATEGORIES.slice(3)}/>
+                            <RenderCards categs={props.categories.slice(3)}/>
                         </CardDeck>
                     </div>
                 </div>
             </div>
+            <Footer/>
         </React.Fragment>
       );
 }

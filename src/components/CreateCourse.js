@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Form,FormGroup,Label,Input, Card, CardHeader, CardBody, Button} from 'reactstrap';
 import {connect} from 'react-redux';
 import {createCourse} from '../store/actions/courseActions';
+import { CATEGORIES } from '../shared/categories';
 
 class CreateCourse extends Component {
     constructor(props){
@@ -23,6 +24,8 @@ class CreateCourse extends Component {
         this.props.createCourse(this.state);
     }
     render() {
+        const options=CATEGORIES.map((categ)=>
+        <option key={categ.id}>{categ.name}</option>)
         return (
             <div className="container">
                 <Card className="shadow col-md-8 offset-md-2 my-4 text-center">
@@ -30,12 +33,18 @@ class CreateCourse extends Component {
                     <CardBody>
                     <Form onSubmit={(e)=>this.handleSubmit(e)}>
                         <FormGroup className='mb-4' >
-                            <Label for="exampleEmail">Course Title</Label>
+                            <Label for="title">Course Title</Label>
                             <Input className='col-md-6 offset-md-3' onChange={e=>this.handleChange(e)} type='text' name="title" id="title" placeholder="Title" />
                         </FormGroup>
                         <FormGroup className='mb-4'>
-                            <Label for="examplePassword">Description of Course</Label>
+                            <Label for="description">Description of Course</Label>
                             <Input className='col-md-6 offset-md-3' onChange={e=>this.handleChange(e)} type='textarea' name="description" id="description" placeholder="Description" />
+                        </FormGroup>
+                        <FormGroup className='mb-4'>
+                            <Label for="category">Category</Label>
+                            <Input className='col-md-6 offset-md-3' onChange={e=>this.handleChange(e)} type="select" name="category" id="category">
+                                {options}
+                            </Input>
                         </FormGroup>
                         <Button type='submit' color='primary'>Create</Button>
                     </Form>
