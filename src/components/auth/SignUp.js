@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 import {Form,FormGroup,Label,Input, Card, CardHeader, CardBody, Button} from 'reactstrap';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import {signUp} from '../../store/actions/authActions';
 
 class SignUp extends Component {
     constructor(props){
         super(props);
         this.state={
             email:'',
-            password:''
+            password:'',
+            firstName: '',
+            lastName: ''
         }
         this.handleChange=this.handleChange.bind(this);
     }
@@ -21,10 +24,11 @@ class SignUp extends Component {
     }
     handleSubmit(e){
         e.preventDefault();
-        console.log(this.state);
+        this.props.signUp(this.state);
     }
     
     render() {
+        const {authSignUpError} = this.props;
         if(this.props.auth.uid) return (<Redirect to="/"/>);
         return (
             <div className="container mt-5">
@@ -33,30 +37,33 @@ class SignUp extends Component {
                     <CardBody>
                     <Form onSubmit={(e)=>this.handleSubmit(e)}>
                         <FormGroup className='mb-4'>
-                            <Label for="examplePassword">Name</Label>
+                            <Label for="Name">Name</Label>
                             <div className="row">
                                 <div className='col-md-3 my-md-0 offset-md-3'>
-                                <Input className='' onChange={e=>this.handleChange(e)} type='text' name="firstname" id="firstname" placeholder="First Name" />
+                                <Input className='' onChange={e=>this.handleChange(e)} type='text' name="firstName" id="firstName" placeholder="First Name" />
                                 </div>
                                 <div className='col-md-3 mt-2 my-md-0'>
-                                <Input className='' onChange={e=>this.handleChange(e)} type='text' name="lastname" id="lastname" placeholder="Last Name" />
+                                <Input className='' onChange={e=>this.handleChange(e)} type='text' name="lastName" id="lastName" placeholder="Last Name" />
                                 </div>
                             </div>
                         </FormGroup>
                         <FormGroup className='mb-4' >
-                            <Label for="exampleEmail">Email</Label>
+                            <Label for="Email">Email</Label>
                             <div className="row">
                             <Input className='col-md-6 offset-md-3' onChange={e=>this.handleChange(e)} type="email" name="email" id="email" placeholder="Email" />
                             </div>
                         </FormGroup>
                         <FormGroup className='mb-4'>
                        
-                            <Label for="examplePassword">Password</Label>
+                            <Label for="Password">Password</Label>
                             <div className="row">
                             <Input className='col-md-6 offset-md-3' onChange={e=>this.handleChange(e)} type="password" name="password" id="password" placeholder="Password" />
                         </div>
                         </FormGroup>
                         <Button type='submit' color='primary'>Submit</Button>
+                        <div className="text-danger mt-3">
+                            {authSignUpError? <p>{authSignUpError}</p> : null}
+                        </div>
                     </Form>
                     </CardBody>
                 </Card>
@@ -65,10 +72,19 @@ class SignUp extends Component {
     }
 }
 
+
 const mapStateToProps = (state) =>{
     return{
-        auth : state.firebase.auth
+        auth : state.firebase.auth,
+        authSignUpError : state.auth.authSignUpError
     }
 }
+const mapDispatchToProps = (dispatch) =>{
+    return({
+        signUp:(newUser)=>{
+            dispatch(signUp(newUser));
+        }
+    });
+}
 
-export default connect(mapStateToProps)(SignUp);
+export default connect(mapStateToProps,mapDispatchToProps)(SignUp);
