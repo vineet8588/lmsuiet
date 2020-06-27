@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card} from 'reactstrap';
+import {Card,Breadcrumb,BreadcrumbItem} from 'reactstrap';
 import readIcon from '../shared/read-icon.png'
 import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
@@ -31,6 +31,10 @@ function CourseList(props){
         <div className='container my-3'>
             <div className="row m-2"><h1>Courses</h1></div>
             <div className="row m-2"><h4>{props.categ.name}</h4></div>
+            <Breadcrumb tag="nav" listTag="div">
+            <BreadcrumbItem tag="a" href="/home"> Home</BreadcrumbItem>
+            <BreadcrumbItem active tag="span">{props.categ.name}</BreadcrumbItem>
+            </Breadcrumb>
             <RenderCourse courses={props.courses}/>    
         </div>
       );
