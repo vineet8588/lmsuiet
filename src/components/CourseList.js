@@ -37,7 +37,6 @@ function CourseList(props){
 }
 
 const mapStatetoProps = (state,props) =>{
-    console.log(state.firestore);
     return{
         courses: state.firestore.ordered[props.categ.name] || state.course.courses
     };

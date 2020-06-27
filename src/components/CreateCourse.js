@@ -3,6 +3,7 @@ import {Form,FormGroup,Label,Input, Card, CardHeader, CardBody, Button} from 're
 import {connect} from 'react-redux';
 import {createCourse} from '../store/actions/courseActions';
 import { CATEGORIES } from '../shared/categories';
+import { Redirect } from 'react-router';
 
 class CreateCourse extends Component {
     constructor(props){
@@ -24,6 +25,11 @@ class CreateCourse extends Component {
         this.props.createCourse(this.state);
     }
     render() {
+        console.log(this.props.auth);
+        if(!this.props.auth.uid) return (<Redirect to={{
+            pathname: '/login',
+            state: { message: 'You must log in first.' }
+        }} />);
         const options=CATEGORIES.map((categ)=>
         <option key={categ.id}>{categ.name}</option>)
         return (
@@ -55,10 +61,16 @@ class CreateCourse extends Component {
     }
 }
 
+const mapStatetoProps = (state) =>{
+    return{
+        auth : state.firebase.auth
+    };
+}
+
 const mapDispatchToProps =(dispatch) =>{
     return{
         createCourse:(course)=>dispatch(createCourse(course)) // this is this.state.createCourse definition
     }
 }
 
-export default connect(null,mapDispatchToProps)(CreateCourse);
+export default connect(mapStatetoProps,mapDispatchToProps)(CreateCourse);
