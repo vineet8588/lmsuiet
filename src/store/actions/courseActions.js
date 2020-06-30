@@ -2,13 +2,15 @@ export const createCourse = (course)=>{
     return (dispatch,getState,{getFirestore,getFirebase}) =>{
         //make async call to database
         const firestore=getFirestore();
+        const profile = getState().firebase.profile;
+        const auth = getState().firebase.auth;
         firestore.add({ collection: course.category },
         {
             ...course,
-            authorFirstName:'Vineet',
-            authorLastName:'Yadav',
-            authorId:12345,
-            authorEmail:'vineet8588@gmail.com',
+            authorFirstName:profile.firstName,
+            authorLastName:profile.lastName,
+            authorId:auth.uid,
+            authorEmail:auth.email,
             createdAt: new Date()
         }).then(()=>{
             dispatch({type:'CREATE_COURSE', course});

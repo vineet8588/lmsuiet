@@ -4,6 +4,7 @@ import readIcon from '../shared/read-icon.png'
 import {connect} from 'react-redux';
 import {firestoreConnect} from 'react-redux-firebase';
 import {compose} from 'redux';
+import moment from 'moment';
 
 function RenderCourse({courses}){
     return(
@@ -16,6 +17,9 @@ function RenderCourse({courses}){
                     <div className="media-body">
                         <h5 className="m-2">{course.title}</h5>
                         <p className="m-2">{course.description}</p>
+                        <footer className="m-2 text-right blockquote-footer"> Created by <cite title="Source Title">{course.authorFirstName} {course.authorLastName}</cite>
+                        <br/>{moment(course.createdAt.toDate()).calendar()}
+                        </footer>
                     </div>
                 </div>
             </Card>
@@ -26,7 +30,6 @@ function RenderCourse({courses}){
 }
 
 function CourseList(props){
-
     return (
         <div className='container my-3'>
             <div className="row m-2"><h1>Courses</h1></div>
@@ -46,4 +49,4 @@ const mapStatetoProps = (state,props) =>{
     };
 }
 
-export default compose(connect(mapStatetoProps),firestoreConnect((props)=>{return[{collection:props.categ.name}]}))(CourseList);
+export default compose(connect(mapStatetoProps),firestoreConnect((props)=>{return[{collection:props.categ.name, orderBy: ['createdAt','desc']}]}))(CourseList);

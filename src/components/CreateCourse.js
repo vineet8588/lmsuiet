@@ -9,6 +9,7 @@ class CreateCourse extends Component {
     constructor(props){
         super(props);
         this.state={
+            category:'Biotechnology'
         }
         this.handleChange=this.handleChange.bind(this);
     }
@@ -21,11 +22,10 @@ class CreateCourse extends Component {
     }
     handleSubmit(e){
         e.preventDefault();
-        console.log(this.state);
         this.props.createCourse(this.state);
+        this.props.history.push('/');
     }
     render() {
-        console.log(this.props.auth);
         if(!this.props.auth.uid) return (<Redirect to={{
             pathname: '/login',
             state: { message: 'You must log in first.' }
