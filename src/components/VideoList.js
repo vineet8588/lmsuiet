@@ -22,9 +22,11 @@ class VideoList extends Component{
         var videoplayer = null;
         const RenderVideos=({videos})=>{
             return(
-                videos.map((video)=>
-                    <ListGroupItem key={video.id} onClick={()=>{this.setState({url:video.url}); this.setState({name:video.name})}} tag="button" action>{video.name}
-                    <footer className="text-right blockquote-footer">{moment(video.createdAt.toDate()).calendar()}
+                videos.map((video)=>  
+                    <ListGroupItem key={video.id} onClick={()=>{this.setState({url:video.url}); this.setState({name:video.name})}} tag="button" action>
+                        <i class="fa fa-play mr-3" aria-hidden="true"></i>
+                        {video.name}
+                        <footer className="text-right blockquote-footer">{moment(video.createdAt.toDate()).calendar()}
                         </footer>
                     </ListGroupItem>
                 )

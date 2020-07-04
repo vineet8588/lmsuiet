@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{category}/{course} {
+      allow read,update,write: if request.auth.uid != null && request.auth.uid==resource.data.authorId;
+      allow read;
+      allow create: if request.auth.uid != null;
+    }
+    match /{category}/{course}/{videos}/{fff} {
+      allow read;
+      allow update,write: if request.auth.uid != null && get(/databases/$(database)/documents/$(category)/$(course)).data.authorId == request.auth.uid
+    }
+    match /users/{userId} {
+      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow create;
+    }
+  }
+}

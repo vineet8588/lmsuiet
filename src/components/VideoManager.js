@@ -42,7 +42,7 @@ class VideoManager extends Component{
         var metadata = {
             contentType: 'video/mp4',
         };
-        const uploadTask = storage.ref(`videos/${videoname}`).put(video,metadata);
+        const uploadTask = storage.ref(`videos/${this.props.location.state.courseId}/${videoname}`).put(video,metadata);
         uploadTask.on('state_changed',
         (snapshot)=>{
             //progress
@@ -55,7 +55,7 @@ class VideoManager extends Component{
         ()=>{
             //complete
             
-            storage.ref('videos').child(videoname).getDownloadURL().then(
+            storage.ref(`videos/${this.props.location.state.courseId}/${videoname}`).getDownloadURL().then(
                 url =>{
                     console.log(url);
                     this.setState({url});
@@ -64,16 +64,28 @@ class VideoManager extends Component{
                 }
             )
         });
+        this.setState({videoname:''});
     }
 
     render(){ 
         const RenderVideos=({videos})=>{
             return(
                 videos.map((video)=>
-                    <ListGroupItem key={video.id}>{video.name}</ListGroupItem>
+                    <ListGroupItem key={video.id}><i class="fa fa-file-video-o mr-3" aria-hidden="true"></i>{video.name}</ListGroupItem>
                 )
             );
         }
+
+        var videoPresent = false;
+        var msg = null;
+        const videoNamesArray = this.props.videos.map((video)=>video.name);
+
+
+        if(videoNamesArray.includes(this.state.videoname)){
+            videoPresent= true;
+            msg="A video with this name is already present.";
+        }
+
         return(
             <div className='container my-4'>
                 <div className='row'>
@@ -87,9 +99,10 @@ class VideoManager extends Component{
                             <Input className='mb-4' onChange={e=>this.handleChange(e)} type='text' name="videoname" id="videoname" placeholder="Video Title" />
                             
                             <input type="file" onChange={e=>this.handleChange(e)} />
+                            <div className="text-danger pt-2">{msg}</div>
                             <br/>
-                            <div className="text-center pt-4">
-                                <Button color="success" className="text-center" disabled={this.state.videoname===''} onClick={e=>this.handleUpload(e)}>Upload</Button>
+                            <div className="text-center pt-2">
+                                <Button color="success" className="text-center" disabled={this.state.videoname==='' || videoPresent} onClick={e=>this.handleUpload(e)}>Upload</Button>
                             </div>
                             </CardBody>
                         </Card>

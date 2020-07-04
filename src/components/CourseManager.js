@@ -25,6 +25,7 @@ function RenderCourse({courses,authId}){
                     <div className="media-body">
                         <h5 className="m-2">{course.title}</h5>
                         <p className="m-2">{course.description}</p>
+                        <p className="m-2 text-muted"><small>Category: {course.category}</small></p>
                         <footer className="m-2 text-right blockquote-footer">{moment(course.createdAt.toDate()).calendar()}
                         </footer>
                     </div>
