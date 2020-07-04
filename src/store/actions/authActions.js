@@ -1,3 +1,5 @@
+import { actionTypes } from 'redux-firestore';
+
 export const signIn = (credentials) => {
     return(dispatch,getState,{getFirebase})=>{
         const firebase = getFirebase();
@@ -18,6 +20,8 @@ export const signOut = () =>{
         const firebase =  getFirebase();
 
         firebase.auth().signOut().then(()=>{
+            window.location.reload();
+            dispatch({ type: actionTypes.CLEAR_DATA });
             dispatch({type : 'LOGOUT_SUCCESS' });
         });
     }
@@ -27,7 +31,6 @@ export const signUp = (newUser)=>{
     return(dispatch,getState,{getFirebase,getFirestore}) =>{
         const firebase = getFirebase();
         const firestore = getFirestore();
-
         firebase.auth().createUserWithEmailAndPassword(
             newUser.email,
             newUser.password

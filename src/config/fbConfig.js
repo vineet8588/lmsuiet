@@ -2,7 +2,7 @@
   import 'firebase/firestore';
   import 'firebase/auth';
   import 'firebase/analytics';
-
+  import 'firebase/storage';
 
   
   // Your web app's Firebase configuration
@@ -21,4 +21,9 @@
   firebase.firestore();
   firebase.analytics();
 
-export default firebase;
+const storage = firebase.storage();
+
+export {
+  storage,
+  firebase as default
+}

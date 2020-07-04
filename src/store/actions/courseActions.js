@@ -12,23 +12,16 @@ export const createCourse = (course)=>{
             authorId:auth.uid,
             authorEmail:auth.email,
             createdAt: new Date()
-        }).then(()=>{
-            dispatch({type:'CREATE_COURSE', course});
+        }).then((docRef)=>{
+            dispatch({type:'CREATE_COURSE', course,courseId: docRef.id});
         }).catch((err)=>{
             dispatch({type:'CREATE_COURSE_ERROR', course});
-        });
-        // firestore.collection('courses').add({
-        //     ...course,
-        //     authorFirstName:'Vineet',
-        //     authorLastName:'Yadav',
-        //     authorId:12345,
-        //     authorEmail:'vineet8588@gmail.com',
-        //     createdAt: new Date()
-        // }).then(()=>{
-        //     dispatch({type:'CREATE_COURSE', course});
-        // }).catch((err)=>{
-        //     dispatch({type:'CREATE_COURSE_ERROR', course});
-        // });
-        
+        });   
     }
+}
+
+export const resetState = () =>{
+    return (dispatch) => {
+        dispatch({type : 'STATE_RESET' });
+    };
 }

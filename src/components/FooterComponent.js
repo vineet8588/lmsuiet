@@ -11,8 +11,11 @@ function Footer(props){
                 <li><Link style={{color:'cyan'}} to="/"> Home</Link></li>
                 <li><Link style={{color:'cyan'}} to="/login">Login</Link></li>
                 <li><Link style={{color:'cyan'}} to="/create">Create</Link></li>
+                <li><Link style={{color:'cyan'}} to="/manage">Manage</Link></li>
             </ul>
             </div>
+            <div className="text-muted">Website currently in development.</div>
+           
         </div>
                 
                 

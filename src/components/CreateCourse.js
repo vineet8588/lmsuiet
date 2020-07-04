@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Form,FormGroup,Label,Input, Card, CardHeader, CardBody, Button} from 'reactstrap';
 import {connect} from 'react-redux';
-import {createCourse} from '../store/actions/courseActions';
+import {createCourse,resetState} from '../store/actions/courseActions';
 import { CATEGORIES } from '../shared/categories';
 import { Redirect } from 'react-router';
 
@@ -23,9 +23,16 @@ class CreateCourse extends Component {
     handleSubmit(e){
         e.preventDefault();
         this.props.createCourse(this.state);
-        this.props.history.push('/');
     }
     render() {
+        if(this.props.courseId){
+            const courseId = this.props.courseId;
+            this.props.resetState();
+            return (<Redirect to={{
+            pathname: '/videomanager',
+            state: {...this.state, courseId: courseId}
+            }} />);
+        }
         if(!this.props.auth.uid) return (<Redirect to={{
             pathname: '/login',
             state: { message: 'You must log in first.' }
@@ -63,13 +70,15 @@ class CreateCourse extends Component {
 
 const mapStatetoProps = (state) =>{
     return{
-        auth : state.firebase.auth
+        auth : state.firebase.auth,
+        courseId: state.course.courseId
     };
 }
 
 const mapDispatchToProps =(dispatch) =>{
     return{
-        createCourse:(course)=>dispatch(createCourse(course)) // this is this.state.createCourse definition
+        createCourse:(course)=>dispatch(createCourse(course)), // this is this.state.createCourse definition
+        resetState:()=>dispatch(resetState())
     }
 }
 

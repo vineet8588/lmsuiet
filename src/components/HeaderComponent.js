@@ -24,6 +24,7 @@ class Header extends Component{
                 </DropdownToggle>
                 <DropdownMenu right>
                     <DropdownItem tag={Link} to="/create">Create Course</DropdownItem>
+                    <DropdownItem tag={Link} to="/manage">Manage Course</DropdownItem>
                     <DropdownItem divider/>
                     <DropdownItem tag={Link} to="/" onClick={this.props.signOut}>Logout </DropdownItem>
                 </DropdownMenu>
