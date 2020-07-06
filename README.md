@@ -1,6 +1,41 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Setting up firebase
 
-## Available Scripts
+Prerequisites.
+1. Create a Firebase project.
+2. Register your app with Firebase.
+3. Add Firebase SDKs and initialize Firebase. Copy the var firebaseConfig onject to src/config/fbConfig.js and repace the one already present there. Keep everything else as it is.
+4. Install firebase CLI.
+5. Access Firebase in your app.
+6. Go to firebase console in your browser and initalize firestore.
+7. Set the following firebase rules: 
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{category}/{course} {
+      allow read,update,write: if request.auth.uid != null && request.auth.uid==resource.data.authorId;
+      allow read;
+      allow create: if request.auth.uid != null;
+    }
+    match /{category}/{course}/{videos}/{fff} {
+      allow read;
+      allow update,write: if request.auth.uid != null && get(/databases/$(database)/documents/$(category)/$(course)).data.authorId == request.auth.uid
+    }
+    match /users/{userId} {
+      allow read, update, delete: if request.auth != null && request.auth.uid == userId;
+      allow create;
+    }
+  }
+}
+```
+8. Initialize firebase storage and deploy as you wish.
+
+9. Use yarn install to install all dependencies of your react project.
+
+
+
+### Available basic pregenerated scripts
 
 In the project directory, you can run:
 
@@ -37,32 +72,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

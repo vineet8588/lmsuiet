@@ -57,6 +57,7 @@ class VideoManager extends Component{
             
             storage.ref(`videos/${this.props.location.state.courseId}/${videoname}`).getDownloadURL().then(
                 url =>{
+                    this.setState({progress: 'Done'});
                     console.log(url);
                     this.setState({url});
                     const {courseId,category} = this.props.location.state;
@@ -65,26 +66,31 @@ class VideoManager extends Component{
             )
         });
         this.setState({videoname:''});
+        
     }
 
     render(){ 
         const RenderVideos=({videos})=>{
             return(
                 videos.map((video)=>
-                    <ListGroupItem key={video.id}><i class="fa fa-file-video-o mr-3" aria-hidden="true"></i>{video.name}</ListGroupItem>
+                    <ListGroupItem key={video.id}><i className="fa fa-file-video-o mr-3" aria-hidden="true"></i>{video.name}</ListGroupItem>
                 )
             );
         }
 
         var videoPresent = false;
         var msg = null;
+        var uploadmsg = null;
         const videoNamesArray = this.props.videos.map((video)=>video.name);
 
-
+        console.log(this.state.progress);
+        if(this.state.progress==='Done'){
+            uploadmsg= "Video Uploaded Successfully!"}
         if(videoNamesArray.includes(this.state.videoname)){
             videoPresent= true;
             msg="A video with this name is already present.";
         }
+
 
         return(
             <div className='container my-4'>
@@ -94,7 +100,8 @@ class VideoManager extends Component{
                             <CardBody>
                             <CardTitle><h4>Add a video</h4></CardTitle>
                             <CardSubtitle className="text-muted">Your uploaded videos will be available in 'Added Videos' section.</CardSubtitle>
-                            <Progress striped className="my-4" color="success" value={this.state.progress}>{this.state.progress}%</Progress>
+                            <Progress striped className="my-3" color="success" value={this.state.progress}>{this.state.progress}%</Progress>
+                            <div className="text-success text-center pb-2">{uploadmsg}</div>
                             <Label for="videoname">Title of your video:</Label>
                             <Input className='mb-4' onChange={e=>this.handleChange(e)} type='text' name="videoname" id="videoname" placeholder="Video Title" />
                             

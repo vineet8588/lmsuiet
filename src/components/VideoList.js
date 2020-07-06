@@ -7,24 +7,30 @@ import "../../node_modules/video-react/dist/video-react.css";
 import {Player} from 'video-react';
 import {withRouter} from 'react-router-dom';
 import moment from 'moment';
+import {firestoreReset} from '../store/actions/courseActions';
 
 
 class VideoList extends Component{
     constructor(props){
         super(props);
+        
         this.state={
-
+            
         }
     }
     
-
+    componentWillUnmount() {
+        console.log('in here');
+        this.props.firestoreReset();
+       }
+    
     render(){
         var videoplayer = null;
         const RenderVideos=({videos})=>{
             return(
                 videos.map((video)=>  
                     <ListGroupItem key={video.id} onClick={()=>{this.setState({url:video.url}); this.setState({name:video.name})}} tag="button" action>
-                        <i class="fa fa-play mr-3" aria-hidden="true"></i>
+                        <i className="fa fa-play mr-3" aria-hidden="true"></i>
                         {video.name}
                         <footer className="text-right blockquote-footer">{moment(video.createdAt.toDate()).calendar()}
                         </footer>
@@ -59,6 +65,7 @@ class VideoList extends Component{
             </div>
         );
     }
+    
 }
 
 
@@ -68,7 +75,13 @@ const mapStatetoProps = (state) =>{
     };
 }
 
-export default compose(connect(mapStatetoProps),firestoreConnect((props)=>{return[
+const mapDispatchToProps =(dispatch) =>{
+    return{
+        firestoreReset : ()=>dispatch(firestoreReset())
+    }
+}
+
+export default compose(connect(mapStatetoProps,mapDispatchToProps),firestoreConnect((props)=>{return[
     {
         collection:props.categ.name,
         doc:props.courseId,

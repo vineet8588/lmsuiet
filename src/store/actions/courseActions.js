@@ -1,3 +1,5 @@
+import { actionTypes } from 'redux-firestore';
+
 export const createCourse = (course)=>{
     return (dispatch,getState,{getFirestore,getFirebase}) =>{
         //make async call to database
@@ -23,5 +25,11 @@ export const createCourse = (course)=>{
 export const resetState = () =>{
     return (dispatch) => {
         dispatch({type : 'STATE_RESET' });
+    };
+}
+
+export const firestoreReset = () =>{
+    return (dispatch) => {
+        dispatch({type: actionTypes.CLEAR_DATA});
     };
 }

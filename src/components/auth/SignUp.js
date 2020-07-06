@@ -17,10 +17,17 @@ class SignUp extends Component {
     }
     
     handleChange(e){
+        if(e.target.id==='firstName' || e.target.id==='lastName'){
+            this.setState({
+                [e.target.id]:  e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1)
+            }
+            );
+        }
+        else{
         this.setState({
             [e.target.id]: e.target.value
         }
-        );
+        );}
     }
     handleSubmit(e){
         e.preventDefault();
