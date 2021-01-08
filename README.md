@@ -1,5 +1,5 @@
-For a live demo : https://lms-uiet.web.app  or  
-                  https://vineet8588.github.io/lmsuiet/
+For a live demo : 
+https://vineet8588.github.io/lmsuiet/ or https://lms-uiet.web.app
 
 
 ## Setting up firebase
