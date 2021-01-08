@@ -3,7 +3,7 @@ import {Form,FormGroup,Label,Input, Card, CardHeader, CardBody, Button} from 're
 import {connect} from 'react-redux';
 import {createCourse,resetState} from '../store/actions/courseActions';
 import { CATEGORIES } from '../shared/categories';
-import { Redirect } from 'react-router';
+import { Redirect } from 'react-router-dom';
 
 class CreateCourse extends Component {
     constructor(props){
