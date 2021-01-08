@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/lmsuiet/static/css/main.de007b4f.chunk.css",
+    "main.js": "/lmsuiet/static/js/main.011d36d9.chunk.js",
+    "main.js.map": "/lmsuiet/static/js/main.011d36d9.chunk.js.map",
+    "runtime-main.js": "/lmsuiet/static/js/runtime-main.fb63c72e.js",
+    "runtime-main.js.map": "/lmsuiet/static/js/runtime-main.fb63c72e.js.map",
+    "static/css/2.1ea2e813.chunk.css": "/lmsuiet/static/css/2.1ea2e813.chunk.css",
+    "static/js/2.e8a8be86.chunk.js": "/lmsuiet/static/js/2.e8a8be86.chunk.js",
+    "static/js/2.e8a8be86.chunk.js.map": "/lmsuiet/static/js/2.e8a8be86.chunk.js.map",
+    "index.html": "/lmsuiet/index.html",
+    "precache-manifest.5cba082662b770de407f80bab133c5be.js": "/lmsuiet/precache-manifest.5cba082662b770de407f80bab133c5be.js",
+    "service-worker.js": "/lmsuiet/service-worker.js",
+    "static/css/2.1ea2e813.chunk.css.map": "/lmsuiet/static/css/2.1ea2e813.chunk.css.map",
+    "static/css/main.de007b4f.chunk.css.map": "/lmsuiet/static/css/main.de007b4f.chunk.css.map",
+    "static/js/2.e8a8be86.chunk.js.LICENSE.txt": "/lmsuiet/static/js/2.e8a8be86.chunk.js.LICENSE.txt",
+    "static/media/font-awesome.min.css": "/lmsuiet/static/media/fontawesome-webfont.fee66e71.woff",
+    "static/media/undraw_professor.svg": "/lmsuiet/static/media/undraw_professor.87ff362e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fb63c72e.js",
+    "static/css/2.1ea2e813.chunk.css",
+    "static/js/2.e8a8be86.chunk.js",
+    "static/css/main.de007b4f.chunk.css",
+    "static/js/main.011d36d9.chunk.js"
+  ]
+}
